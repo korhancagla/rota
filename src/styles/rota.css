@@ -100,7 +100,7 @@ a {
   z-index: -3;
   object-fit: cover;
   opacity: 1;
-  transition: opacity .22s cubic-bezier(.2, .8, .2, 1);
+  transition: opacity 1s cubic-bezier(.22, .8, .2, 1);
 }
 
 .rota-home__wash {
@@ -115,15 +115,16 @@ a {
   );
   pointer-events: none;
   opacity: 0;
-  transition: opacity .22s cubic-bezier(.2, .8, .2, 1);
+  transition: opacity 1s cubic-bezier(.22, .8, .2, 1);
 }
 
 .rota-particle-field {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  opacity: .9;
 }
 
 .rota-particle-field .particles-js-canvas-el {
@@ -133,11 +134,17 @@ a {
 }
 
 .rota-home--video-loading .rota-home__video {
-  opacity: 1;
+  opacity: 0;
 }
 
 .rota-home--video-loading .rota-home__wash {
-  opacity: 0;
+  opacity: 1;
+}
+
+.rota-home__tagline-wrap,
+.rota-home__scroll-cue {
+  position: relative;
+  z-index: 1;
 }
 
 .rota-site--intro-pending .rota-header__brand {
