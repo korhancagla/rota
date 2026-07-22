@@ -565,10 +565,12 @@ a {
   transform: translateX(0);
 }
 
-.rota-header__brand:hover .rota-header__brand-word,
-.rota-header__brand:focus-visible .rota-header__brand-word {
-  opacity: 0;
-  transform: translateX(-120%);
+@media (hover: hover) and (pointer: fine) {
+  .rota-header__brand:hover .rota-header__brand-word,
+  .rota-header__brand:focus-visible .rota-header__brand-word {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
 }
 
 body.rota-menu-is-open .rota-header__brand-word,
@@ -665,6 +667,8 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
   box-shadow: none;
   color: #292929;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
@@ -688,16 +692,12 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
     transform 0.34s cubic-bezier(0.5, -0.25, 0.25, 1.4) 0.08s;
 }
 
-.rota-menu-button:hover::before,
 .rota-menu-button:focus-visible::before,
 .rota-menu-button[aria-expanded="true"]::before {
   opacity: 1;
   transform: scale(1);
 }
 
-.rota-menu-button:hover {
-  background: transparent;
-}
 .rota-menu-button:active {
   transform: scale(0.96);
 }
@@ -778,20 +778,41 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
   stroke-dashoffset: 0;
 }
 
-.rota-menu-button[aria-expanded="true"]:hover,
 .rota-menu-button[aria-expanded="true"]:focus-visible {
   transform: translateY(-4px) scale(1.04);
 }
 
-.rota-menu-button[aria-expanded="true"]:hover::before,
 .rota-menu-button[aria-expanded="true"]:focus-visible::before {
   background: linear-gradient(135deg, var(--rota-blue), var(--rota-teal), var(--rota-green));
   box-shadow: 0 16px 34px rgba(0, 0, 0, .22);
 }
 
-.rota-menu-button[aria-expanded="true"]:hover .rota-menu-button__logo path,
 .rota-menu-button[aria-expanded="true"]:focus-visible .rota-menu-button__logo path {
   stroke: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rota-menu-button:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .rota-menu-button:hover {
+    background: transparent;
+  }
+
+  .rota-menu-button[aria-expanded="true"]:hover {
+    transform: translateY(-4px) scale(1.04);
+  }
+
+  .rota-menu-button[aria-expanded="true"]:hover::before {
+    background: linear-gradient(135deg, var(--rota-blue), var(--rota-teal), var(--rota-green));
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .22);
+  }
+
+  .rota-menu-button[aria-expanded="true"]:hover .rota-menu-button__logo path {
+    stroke: #fff;
+  }
 }
 .rota-menu-button[aria-expanded="true"]
   .rota-menu-button__logo
@@ -3347,6 +3368,8 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
     top: var(--mobile-header-top);
     left: 25px;
     width: 190px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .rota-header__actions {
     position: absolute;

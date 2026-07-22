@@ -170,9 +170,15 @@ const { pageName, menuId = "subpage-menu", languageHref = "/en/" } = Astro.props
   :global(body.rota-menu-is-open) .subpage-header :global(.rota-header__language) { width: calc(var(--header-action-size) * .65); height: calc(var(--header-action-size) * .65); font-size: clamp(12px,.9vw,15px); }
   .subpage-header :global(.rota-header__language:hover), .subpage-header :global(.rota-header__language:focus-visible) { background: #fff; color: var(--rota-blue); }
   .subpage-header :global(.rota-menu-button span) { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.24); }
-  .subpage-header :global(.rota-menu-button:hover span:nth-child(1)), .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(1)) { background: var(--rota-blue); }
-  .subpage-header :global(.rota-menu-button:hover span:nth-child(2)), .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(2)) { background: var(--rota-teal); }
-  .subpage-header :global(.rota-menu-button:hover span:nth-child(3)), .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(3)) { background: var(--rota-green); }
+  .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(1)) { background: var(--rota-blue); }
+  .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(2)) { background: var(--rota-teal); }
+  .subpage-header :global(.rota-menu-button:focus-visible span:nth-child(3)) { background: var(--rota-green); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .subpage-header :global(.rota-menu-button:hover span:nth-child(1)) { background: var(--rota-blue); }
+    .subpage-header :global(.rota-menu-button:hover span:nth-child(2)) { background: var(--rota-teal); }
+    .subpage-header :global(.rota-menu-button:hover span:nth-child(3)) { background: var(--rota-green); }
+  }
 
   .subpage-header[data-hover-zone="brand"] { --header-blue-left: 38%; --header-page-left: 58%; }
   .subpage-header[data-hover-zone="actions"] { --header-blue-left: 22%; --header-page-left: 42%; }
