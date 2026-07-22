@@ -3324,8 +3324,12 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
   .rota-header {
     --header-action-size: 60px;
     --mobile-header-top: max(10px, env(safe-area-inset-top, 0px));
+    position: sticky;
+    top: 0;
+    height: 0;
   }
   .rota-header::before {
+    position: absolute;
     height: calc(112px + env(safe-area-inset-top, 0px));
     border-bottom: 1px solid rgba(0, 168, 150, .42);
     background: linear-gradient(
@@ -3339,11 +3343,13 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
     transition: opacity .36s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
   }
   .rota-header__brand {
+    position: absolute;
     top: var(--mobile-header-top);
     left: 25px;
     width: 190px;
   }
   .rota-header__actions {
+    position: absolute;
     top: calc(var(--mobile-header-top) + 17px);
     right: 25px;
     gap: 6px;
