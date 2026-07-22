@@ -564,6 +564,15 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
   // İlk boyamada stil yüklenmeden masaüstü menüsünün görünmesini engeller.
   if (menu) menu.hidden = false;
 
+  const scrollToHomeTop = () => {
+    window.scrollTo({ top: 0, behavior: reducePageMotion ? "auto" : "smooth" });
+  };
+
+  homeBrandLink?.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    window.requestAnimationFrame(scrollToHomeTop);
+  }, { passive: false });
+
   homeBrandLink?.addEventListener("click", (event) => {
     const destination = new URL(homeBrandLink.href);
     const isCurrentHome = destination.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\/$/, "");
@@ -571,18 +580,19 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
     if (!isCurrentHome) return;
 
     event.preventDefault();
-    window.scrollTo({ top: 0, behavior: reducePageMotion ? "auto" : "smooth" });
+    scrollToHomeTop();
   });
 
   if (reducePageMotion) {
     site?.classList.remove("rota-site--intro-pending");
-    site?.classList.add("rota-site--intro-logo", "rota-site--intro-controls", "rota-site--intro-beams", "rota-site--intro-complete");
+    site?.classList.add("rota-site--intro-logo", "rota-site--intro-tagline", "rota-site--intro-controls", "rota-site--intro-beams", "rota-site--intro-complete");
   } else {
     window.requestAnimationFrame(() => {
       window.setTimeout(() => {
         site?.classList.remove("rota-site--intro-pending");
         site?.classList.add("rota-site--intro-logo");
       }, 140);
+      window.setTimeout(() => site?.classList.add("rota-site--intro-tagline"), 700);
     });
   }
 
@@ -727,7 +737,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
   if (reducePageMotion) {
     showTaglineImmediately();
   } else {
-    window.setTimeout(typeHeroTagline, 3200);
+    window.setTimeout(typeHeroTagline, 900);
   }
 
   const startVideo = () => {
@@ -903,7 +913,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
     brand?.classList.add("rota-header__brand--ready");
     if (site?.dataset.introFollowup === "started") return;
     if (site) site.dataset.introFollowup = "started";
-    const controlsDelay = reducePageMotion ? 0 : Math.max(1200, loopStart * 1000);
+    const controlsDelay = reducePageMotion ? 0 : 420;
     window.setTimeout(() => site?.classList.add("rota-site--intro-controls"), controlsDelay);
     window.setTimeout(() => site?.classList.add("rota-site--intro-beams"), controlsDelay + 260);
     window.setTimeout(() => site?.classList.add("rota-site--intro-complete"), controlsDelay + 6460);
@@ -912,6 +922,21 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
   logoWord?.addEventListener("animationend", finishBrandIntro, { once: true });
   window.setTimeout(finishBrandIntro, 1600);
   window.setTimeout(() => home?.classList.remove("rota-home--video-loading"), 1400);
+
+  const scheduleMobileBrandPulse = () => {
+    if (!brand || reducePageMotion || !window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
+    const delay = 5000 + Math.random() * 6500;
+    window.setTimeout(() => {
+      if (!document.hidden && menu?.dataset.open !== "true") {
+        brand.classList.add("rota-header__brand--ambient-pulse");
+        window.setTimeout(() => brand.classList.remove("rota-header__brand--ambient-pulse"), 900);
+      }
+      scheduleMobileBrandPulse();
+    }, delay);
+  };
+
+  scheduleMobileBrandPulse();
+
   const restartHeroVideoLoop = () => {
     if (!video) return;
     const safeEnd = Math.min(loopEnd, video.duration || loopEnd);

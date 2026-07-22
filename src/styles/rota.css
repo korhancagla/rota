@@ -193,13 +193,13 @@ a {
   transform: translate3d(0, -50%, 0);
 }
 
-.rota-site:not(.rota-site--intro-controls) .rota-home__tagline-wrap {
+.rota-site:not(.rota-site--intro-tagline) .rota-home__tagline-wrap {
   visibility: hidden;
   opacity: 0;
   transform: translate3d(0, 18px, 0);
 }
 
-.rota-site--intro-controls .rota-home__tagline-wrap {
+.rota-site--intro-tagline .rota-home__tagline-wrap {
   visibility: visible;
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -394,6 +394,12 @@ a {
   .rota-header__brand {
     position: fixed;
   }
+  .rota-header__brand:hover .rota-header__brand-word,
+  .rota-header__brand:focus .rota-header__brand-word,
+  .rota-header__brand:focus-visible .rota-header__brand-word {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
   body.rota-menu-is-open .rota-header__brand-word,
   body.rota-menu-is-open .rota-header__brand:hover .rota-header__brand-word {
     opacity: 1 !important;
@@ -453,7 +459,7 @@ a {
   isolation: isolate;
   overflow: visible;
   pointer-events: auto;
-  transition: top .45s cubic-bezier(.16, 1, .3, 1), opacity .32s ease, visibility .32s ease;
+  transition: top .45s cubic-bezier(.16, 1, .3, 1), opacity .32s ease, visibility .32s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
 }
 
 .rota-header__brand-svg {
@@ -522,6 +528,11 @@ a {
   opacity: 0;
 }
 
+.rota-header__brand--ready .rota-header__brand-mark {
+  animation: none;
+  opacity: 1;
+}
+
 .rota-header__brand-word-clip {
   position: absolute;
   z-index: 2;
@@ -566,10 +577,41 @@ a {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .rota-header__brand:hover,
+  .rota-header__brand:focus-visible {
+    transform: translateY(-2px) scale(1.022);
+  }
+
   .rota-header__brand:hover .rota-header__brand-word,
   .rota-header__brand:focus-visible .rota-header__brand-word {
-    opacity: 0;
-    transform: translateX(-120%);
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  body:not(.rota-menu-is-open) .rota-header__brand:hover .rota-header__brand-mark,
+  body:not(.rota-menu-is-open) .rota-header__brand:focus-visible .rota-header__brand-mark {
+    animation: rota-brand-colour-pulse .62s cubic-bezier(.2,.72,.28,1) both;
+  }
+
+  body:not(.rota-menu-is-open) .rota-header__brand:hover .rota-header__brand-word,
+  body:not(.rota-menu-is-open) .rota-header__brand:focus-visible .rota-header__brand-word {
+    animation: rota-brand-colour-pulse .68s cubic-bezier(.2,.72,.28,1) .08s both;
+  }
+}
+
+@keyframes rota-brand-colour-pulse {
+  0%, 100% { filter: brightness(1) saturate(1) contrast(1); }
+  42% { filter: brightness(1.34) saturate(1.42) contrast(1.04); }
+  68% { filter: brightness(1.12) saturate(1.2) contrast(1.02); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .rota-header__brand--ready.rota-header__brand--ambient-pulse .rota-header__brand-mark {
+    animation: rota-brand-colour-pulse .62s cubic-bezier(.2,.72,.28,1) both;
+  }
+
+  .rota-header__brand--ready.rota-header__brand--ambient-pulse .rota-header__brand-word {
+    animation: rota-brand-colour-pulse .68s cubic-bezier(.2,.72,.28,1) .08s both;
   }
 }
 
