@@ -47,12 +47,7 @@ const sitemapGroups = [
         href: "#technologies",
         items: [
           { label: "Kaynak Teknolojileri", href: "/teknolojiler/kaynak-teknolojileri/" },
-          { label: "Punta Kaynak Sistemleri", href: "/teknolojiler/kaynak-teknolojileri/", depth: 2 },
-          { label: "Gazaltı Kaynak Sistemleri", href: "/teknolojiler/kaynak-teknolojileri/", depth: 2 },
           { label: "Taşıma Sistemleri", href: "/teknolojiler/tasima-sistemleri/" },
-          { label: "Robotik Taşıma Sistemleri", href: "/teknolojiler/tasima-sistemleri/", depth: 2 },
-          { label: "Paletleme Sistemleri", href: "/teknolojiler/tasima-sistemleri/", depth: 2 },
-          { label: "Konveyörlü Taşıma Sistemleri", href: "/teknolojiler/tasima-sistemleri/", depth: 2 },
           { label: "Montaj Sistemleri", href: "/teknolojiler/montaj-sistemleri/" },
           { label: "Mastikleme / Dozajlama Sistemleri", href: "/teknolojiler/mastikleme-dozajlama-sistemleri/" },
           { label: "İşbirlikçi Robotlu Sistemler", href: "/teknolojiler/isbirlikci-robotlu-sistemler/" },
@@ -216,7 +211,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
           <p class="rota-menu__panel-title">{group.title}</p>
           <div class="rota-menu__sub-links">
             {group.items.map((item) => (
-              <a class={`rota-menu__depth-${item.depth ?? 1}`} href={item.href} title={`${item.label} sayfasını inceleyin`}>{item.label}</a>
+              <a href={item.href} title={`${item.label} sayfasını inceleyin`}>{item.label}</a>
             ))}
           </div>
         </div>
