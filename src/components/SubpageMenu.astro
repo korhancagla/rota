@@ -1,0 +1,126 @@
+---
+import Icon from "./Icon.astro";
+import DesktopMenu from "./DesktopMenu.astro";
+
+interface Props { id?: string; languageHref?: string; }
+const { id = "subpage-menu", languageHref = "/en/" } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+const mobileGroups = [
+  {
+    panel: "corporate",
+    title: "Kurumsal",
+    items: [
+      { label: "Hakkımızda", href: "/hakkimizda/" },
+      { label: "Vizyon & Misyon", href: "/vizyon-misyon/" },
+      { label: "Kalite Politikamız", href: "/kalite-politikamiz/" },
+      { label: "Sertifikalar", href: "/sertifikalar/" },
+      { label: "Referanslar", href: "/referanslar/" },
+    ],
+  },
+  {
+    panel: "expertise",
+    title: "Uzmanlıklar",
+    items: [
+      { label: "Proses Tasarım ve Simülasyon", href: "/uzmanliklar/proses-tasarim-ve-simulasyon/" },
+      { label: "Mekanik Tasarım", href: "/uzmanliklar/mekanik-tasarim/" },
+      { label: "3D Ölçüm ve Kalite Kontrol", href: "/uzmanliklar/3d-olcum-ve-kalite-kontrol/" },
+      { label: "Talaşlı İmalat", href: "/uzmanliklar/talasli-imalat/" },
+      { label: "Mekanik – Elektrik İmalat", href: "/uzmanliklar/mekanik-elektrik-imalat/" },
+      { label: "Elektrik Projelendirme", href: "/uzmanliklar/elektrik-projelendirme/" },
+      { label: "Otomasyon Yazılım", href: "/uzmanliklar/otomasyon-yazilim/" },
+      { label: "Robot Yazılımı ve Offline Programlama", href: "/uzmanliklar/robot-yazilimi-ve-offline-programlama/" },
+      { label: "Sistem Kurulum ve Devreye Alma", href: "/uzmanliklar/sistem-kurulum-ve-devreye-alma/" },
+    ],
+  },
+  {
+    panel: "technologies",
+    title: "Teknolojiler",
+    items: [
+      { label: "Kaynak Teknolojileri", href: "/teknolojiler/kaynak-teknolojileri/" },
+      { label: "Taşıma Sistemleri", href: "/teknolojiler/tasima-sistemleri/" },
+      { label: "Montaj Sistemleri", href: "/teknolojiler/montaj-sistemleri/" },
+      { label: "Mastikleme / Dozajlama Sistemleri", href: "/teknolojiler/mastikleme-dozajlama-sistemleri/" },
+      { label: "İşbirlikçi Robotlu Sistemler", href: "/teknolojiler/isbirlikci-robotlu-sistemler/" },
+    ],
+  },
+];
+---
+
+<nav class="rota-menu subpage-menu" id={id} data-open="false" data-level="root" aria-label="Ana menü" aria-hidden="true" data-subpage-menu hidden>
+  <DesktopMenu languageHref={languageHref} />
+  <div class="rota-menu__stage">
+    <div class="rota-menu__panel rota-menu__panel--main" data-menu-panel="main" data-active="true" aria-hidden="false">
+      <a class="rota-menu__mobile-language" href={languageHref} hreflang="en"><span>English</span><strong>EN</strong></a>
+      <div class="rota-menu__main-links">
+        <a href="/"><span>Ana Sayfa</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+        {mobileGroups.map((group) => (
+          <button type="button" data-subpage-menu-target={group.panel} aria-controls={`${id}-panel-${group.panel}`}>
+            <span>{group.title}</span><i class="rota-menu__chevron rota-menu__chevron--down" aria-hidden="true"></i>
+          </button>
+        ))}
+        <a href="/referanslar/"><span>Referanslar</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+        <a href="/iletisim/"><span>İletişim</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+      </div>
+    </div>
+
+    {mobileGroups.map((group) => (
+      <div class="rota-menu__panel rota-menu__panel--sub" id={`${id}-panel-${group.panel}`} data-menu-panel={group.panel} data-active="false" aria-hidden="true">
+        <button class="rota-menu__back" type="button" data-subpage-menu-back>
+          <i class="rota-menu__chevron rota-menu__chevron--back" aria-hidden="true"></i>Geri
+        </button>
+        <p class="rota-menu__panel-title">{group.title}</p>
+        <div class="rota-menu__sub-links">
+          {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+        </div>
+      </div>
+    ))}
+  </div>
+  <p class="rota-menu__copyright">Tüm hakları saklıdır © {currentYear} Rota Robotik</p>
+  <div class="rota-menu__social-rail" aria-label="Sosyal medya">
+    <div class="rota-menu__socials">
+      <a href="/#contact" aria-label="Instagram"><Icon name="instagram" /></a>
+      <a href="https://tr.linkedin.com/company/rota-robotik-sistemler" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const subpageMenuButton = document.querySelector<HTMLButtonElement>("[data-subpage-menu-button]");
+  const subpageMenu = document.querySelector<HTMLElement>("[data-subpage-menu]");
+  const subpageMenuPanels = Array.from(subpageMenu?.querySelectorAll<HTMLElement>("[data-menu-panel]") ?? []);
+  const subpageMenuTargets = Array.from(subpageMenu?.querySelectorAll<HTMLButtonElement>("[data-subpage-menu-target]") ?? []);
+  const subpageMenuBackButtons = Array.from(subpageMenu?.querySelectorAll<HTMLButtonElement>("[data-subpage-menu-back]") ?? []);
+
+  // İlk boyamada stil yüklenmeden masaüstü menüsünün görünmesini engeller.
+  if (subpageMenu) subpageMenu.hidden = false;
+
+  const showSubpageMenuPanel = (name: string, moveFocus = false) => {
+    if (!subpageMenu) return;
+    subpageMenu.dataset.level = name === "main" ? "root" : "child";
+    subpageMenuPanels.forEach((panel) => {
+      const active = panel.dataset.menuPanel === name;
+      panel.dataset.active = String(active);
+      panel.setAttribute("aria-hidden", String(!active));
+    });
+    subpageMenu.scrollTop = 0;
+    if (moveFocus) window.setTimeout(() => subpageMenuPanels.find((panel) => panel.dataset.menuPanel === name)?.querySelector<HTMLElement>("button, a")?.focus(), 260);
+  };
+
+  const setSubpageMenu = (open: boolean) => {
+    if (!subpageMenuButton || !subpageMenu) return;
+    subpageMenuButton.setAttribute("aria-expanded", String(open));
+    subpageMenuButton.setAttribute("aria-label", open ? "Menüyü kapat" : "Menüyü aç");
+    subpageMenu.dataset.open = String(open);
+    subpageMenu.setAttribute("aria-hidden", String(!open));
+    document.body.classList.toggle("rota-menu-is-open", open);
+    if (open) showSubpageMenuPanel("main");
+  };
+
+  subpageMenuButton?.addEventListener("click", () => setSubpageMenu(subpageMenuButton.getAttribute("aria-expanded") !== "true"));
+  subpageMenuTargets.forEach((target) => target.addEventListener("click", () => showSubpageMenuPanel(target.dataset.subpageMenuTarget ?? "main", true)));
+  subpageMenuBackButtons.forEach((back) => back.addEventListener("click", () => showSubpageMenuPanel("main", true)));
+  subpageMenu?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => link.addEventListener("click", () => setSubpageMenu(false)));
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape") setSubpageMenu(false); });
+</script>
