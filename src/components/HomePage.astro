@@ -962,7 +962,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
   let scrollMapFrame = 0;
   const updateScrollMap = () => {
     scrollMapFrame = 0;
-    if (header) header.dataset.scrolled = String(window.innerWidth > 720 && window.scrollY > 24);
+    if (header) header.dataset.scrolled = String(window.scrollY > 24);
     const activeIndex = Math.min(scrollDots.length - 1, currentSectionIndex());
     scrollDots.forEach((dot, index) => dot.dataset.active = String(index === activeIndex));
   };
