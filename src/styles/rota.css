@@ -30,7 +30,10 @@ body {
 html {
   background: var(--rota-bg);
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+}
+
+html:has(.rota-home) {
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -76,6 +79,7 @@ a {
   --tagline-x: 50%;
   --tagline-y: 50%;
   --tagline-angle: 0deg;
+  --hero-scroll: 0;
   position: relative;
   isolation: isolate;
   width: 100%;
@@ -85,7 +89,7 @@ a {
   border-bottom: 3px solid var(--rota-teal);
   background: var(--rota-bg);
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
 .rota-home__video,
@@ -99,8 +103,11 @@ a {
 .rota-home__video {
   z-index: -3;
   object-fit: cover;
-  opacity: 1;
-  transition: opacity 1s cubic-bezier(.22, .8, .2, 1);
+  opacity: calc(1 - var(--hero-scroll) * .96);
+  filter: blur(calc(var(--hero-scroll) * 9px)) saturate(calc(1 - var(--hero-scroll) * .35));
+  transform: scale(calc(1 + var(--hero-scroll) * .045));
+  transition: opacity .16s linear;
+  will-change: filter, opacity, transform;
 }
 
 .rota-home__wash {
@@ -244,7 +251,11 @@ a {
   white-space: nowrap;
   -webkit-font-smoothing: antialiased;
   text-shadow: 0 4px 16px rgba(0, 97, 157, .16);
+  opacity: calc(1 - var(--hero-scroll) * .92);
+  transform: translate3d(0, calc(var(--hero-scroll) * -25vh), 0) scale(calc(1 + var(--hero-scroll) * .14));
+  transform-origin: center bottom;
   transition: background-position .14s ease-out, background-image .14s ease-out;
+  will-change: opacity, transform;
 }
 
 .rota-home__tagline-first,
@@ -1611,7 +1622,7 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
     radial-gradient(circle at 76% 48%, rgba(255, 255, 255, .96) 0, rgba(255, 255, 255, .38) 28%, transparent 58%),
     var(--rota-bg);
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
 .rota-motion-enabled [data-scroll-motion] {
@@ -2958,7 +2969,7 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
     #061827;
   color: #fff;
   scroll-snap-align: end;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
 .rota-certification-trust {
@@ -3262,7 +3273,7 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
 }
 
 @media (max-width: 900px), (hover: none) and (pointer: coarse) {
-  html {
+  html:has(.rota-home) {
     scroll-snap-type: none;
     overscroll-behavior-y: auto;
   }
@@ -3272,6 +3283,15 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
   .rota-footer {
     scroll-snap-align: none;
     scroll-snap-stop: normal;
+  }
+  .rota-home__video {
+    opacity: calc(1 - var(--hero-scroll) * .82);
+    filter: blur(calc(var(--hero-scroll) * 5px)) saturate(calc(1 - var(--hero-scroll) * .22));
+    transform: scale(calc(1 + var(--hero-scroll) * .022));
+  }
+  .rota-home__tagline {
+    opacity: calc(1 - var(--hero-scroll) * .8);
+    transform: translate3d(0, calc(var(--hero-scroll) * -13vh), 0) scale(calc(1 + var(--hero-scroll) * .06));
   }
   .rota-technologies__marquee {
     -webkit-overflow-scrolling: touch;
