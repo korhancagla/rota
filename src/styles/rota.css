@@ -3323,14 +3323,26 @@ body.rota-menu-is-open .rota-header__language:focus-visible {
   }
   .rota-header {
     --header-action-size: 60px;
+    --mobile-header-top: max(10px, env(safe-area-inset-top, 0px));
+  }
+  .rota-header::before {
+    height: calc(112px + env(safe-area-inset-top, 0px));
+    background: linear-gradient(
+      180deg,
+      #f7f9f8 0,
+      #f7f9f8 calc(env(safe-area-inset-top, 0px) + 54px),
+      rgba(247, 249, 248, .82) 76%,
+      rgba(247, 249, 248, 0) 100%
+    );
+    opacity: 1;
   }
   .rota-header__brand {
-    top: 25px;
+    top: var(--mobile-header-top);
     left: 25px;
     width: 190px;
   }
   .rota-header__actions {
-    top: 40px;
+    top: calc(var(--mobile-header-top) + 17px);
     right: 25px;
     gap: 6px;
   }
