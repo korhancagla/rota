@@ -423,6 +423,7 @@ const referenceCount = String(references.length).padStart(2, "0");
     background: transparent;
     box-shadow: none;
     backdrop-filter: none;
+    perspective: 900px;
     animation: references-mark-pop .95s cubic-bezier(.22, 1.45, .36, 1) 1.12s both;
   }
 
@@ -431,6 +432,9 @@ const referenceCount = String(references.length).padStart(2, "0");
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    animation: references-mark-turn 1.2s cubic-bezier(.65, 0, .35, 1) 2.05s both;
   }
 
   .references-hero__visual > i {
@@ -729,6 +733,11 @@ const referenceCount = String(references.length).padStart(2, "0");
     to { opacity: 1; transform: scale(1) rotate(0); }
   }
 
+  @keyframes references-mark-turn {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(1turn); }
+  }
+
   @keyframes references-line-draw {
     from { opacity: 0; transform: scaleX(0); }
     to { opacity: 1; transform: scaleX(1); }
@@ -919,6 +928,7 @@ const referenceCount = String(references.length).padStart(2, "0");
     .references-hero__visual,
     .references-hero__ring,
     .references-hero__mark,
+    .references-hero__mark img,
     .references-hero__visual > i,
     .references-hero__stats::before,
     .references-hero__stats > span {

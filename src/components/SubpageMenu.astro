@@ -53,14 +53,14 @@ const mobileGroups = [
     <div class="rota-menu__panel rota-menu__panel--main" data-menu-panel="main" data-active="true" aria-hidden="false">
       <a class="rota-menu__mobile-language" href={languageHref} hreflang="en"><span>English</span><strong>EN</strong></a>
       <div class="rota-menu__main-links">
-        <a href="/"><span>Ana Sayfa</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+        <a href="/" title="Rota Robotik ana sayfasını açın"><span>Ana Sayfa</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
         {mobileGroups.map((group) => (
           <button type="button" data-subpage-menu-target={group.panel} aria-controls={`${id}-panel-${group.panel}`}>
             <span>{group.title}</span><i class="rota-menu__chevron rota-menu__chevron--down" aria-hidden="true"></i>
           </button>
         ))}
-        <a href="/referanslar/"><span>Referanslar</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
-        <a href="/iletisim/"><span>İletişim</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+        <a href="/referanslar/" title="Tüm referanslarımızı inceleyin"><span>Referanslar</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+        <a href="/iletisim/" title="İletişim sayfasını açın"><span>İletişim</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
       </div>
     </div>
 
@@ -71,7 +71,7 @@ const mobileGroups = [
         </button>
         <p class="rota-menu__panel-title">{group.title}</p>
         <div class="rota-menu__sub-links">
-          {group.items.map((item) => <a href={item.href}>{item.label}</a>)}
+          {group.items.map((item) => <a href={item.href} title={`${item.label} sayfasını inceleyin`}>{item.label}</a>)}
         </div>
       </div>
     ))}
@@ -79,8 +79,7 @@ const mobileGroups = [
   <p class="rota-menu__copyright">Tüm hakları saklıdır © {currentYear} Rota Robotik</p>
   <div class="rota-menu__social-rail" aria-label="Sosyal medya">
     <div class="rota-menu__socials">
-      <a href="/#contact" aria-label="Instagram"><Icon name="instagram" /></a>
-      <a href="https://tr.linkedin.com/company/rota-robotik-sistemler" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      <a href="https://www.linkedin.com/company/rota-robotik-sistemler/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
       <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
     </div>
   </div>

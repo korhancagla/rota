@@ -1,9 +1,8 @@
 ---
 import Icon from "./Icon.astro";
 
-interface Props { homeLinks?: boolean; languageHref?: string; }
-const { homeLinks = false, languageHref = "/en/" } = Astro.props;
-const homeAnchor = (anchor: string) => homeLinks ? `#${anchor}` : `/#${anchor}`;
+interface Props { languageHref?: string; }
+const { languageHref = "/en/" } = Astro.props;
 
 const columns = [
   {
@@ -50,22 +49,22 @@ const columns = [
   <div class="rota-menu-desktop__grid">
     {columns.map((column) => (
       <section class="rota-menu-desktop__column">
-        <a class="rota-menu-desktop__title" href={column.href}>{column.title}<i aria-hidden="true"></i></a>
+        <a class="rota-menu-desktop__title" href={column.href} title={`${column.title} sayfasını inceleyin`}>{column.title}<i aria-hidden="true"></i></a>
         <div class="rota-menu-desktop__links">
           {column.items.map((item) => (
-            <a href={item.href}><span aria-hidden="true">›</span>{item.label}</a>
+            <a href={item.href} title={`${item.label} sayfasını inceleyin`}><span aria-hidden="true">›</span>{item.label}</a>
           ))}
         </div>
       </section>
     ))}
 
     <section class="rota-menu-desktop__column rota-menu-desktop__contact">
-      <a class="rota-menu-desktop__title" href="/iletisim/">İletişim<i aria-hidden="true"></i></a>
-      <a class="rota-menu-desktop__form-link" href="/iletisim/"><span aria-hidden="true">›</span>İletişim Formu</a>
+      <a class="rota-menu-desktop__title" href="/iletisim/" title="İletişim sayfasını açın">İletişim<i aria-hidden="true"></i></a>
+      <a class="rota-menu-desktop__form-link" href="/iletisim/" title="İletişim formunu açın"><span aria-hidden="true">›</span>İletişim Formu</a>
       <div class="rota-menu-desktop__address">
         <strong>ROTA ROBOTİK</strong>
         <p>Yarış Çıkmazı Sokak No:1<br />Bağımsız Bölüm No:347<br />İSTİM Tuzla / İstanbul</p>
-        <a href="tel:+905387788118"><Icon name="telephone" />+90 538 778 81 18</a>
+        <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden iletişime geçin"><Icon name="whatsapp" />+90 538 778 81 18</a>
         <a href="mailto:info@rotarobotik.com"><Icon name="envelope" />info@rotarobotik.com</a>
       </div>
     </section>
@@ -75,8 +74,7 @@ const columns = [
     <p><i aria-hidden="true"></i>MÜHENDİSLİKLE GELECEĞİ TASARLIYORUZ</p>
     <div class="rota-menu-desktop__footer-actions">
       <div class="rota-menu-desktop__socials" aria-label="Sosyal medya">
-        <a href="https://tr.linkedin.com/company/rota-robotik-sistemler" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
-        <a href={homeAnchor("contact")} aria-label="Instagram"><Icon name="instagram" /></a>
+        <a href="https://www.linkedin.com/company/rota-robotik-sistemler/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
         <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
       </div>
       <a class="rota-menu-desktop__language" href={languageHref} hreflang="en">EN <span aria-hidden="true">⌄</span></a>

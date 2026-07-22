@@ -171,9 +171,9 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
         <path pathLength="1" d="M191 247L411 34" />
         <path pathLength="1" d="M411 34V433L352 375" />
       </svg>
-      <img class="rota-header__brand-svg rota-header__brand-mark" src="/media/brand/logo.svg" width="363" height="180" alt="" fetchpriority="high" />
+      <img class="rota-header__brand-svg rota-header__brand-mark" src="/media/brand/logo.svg" width="363" height="180" alt={isTr ? "Rota Robotik Sistemler logosu" : "Rota Robotic Systems logo"} fetchpriority="high" />
       <span class="rota-header__brand-word-clip" aria-hidden="true">
-        <img class="rota-header__brand-svg rota-header__brand-word" src="/media/brand/logo.svg" width="363" height="180" alt="" fetchpriority="high" />
+        <img class="rota-header__brand-svg rota-header__brand-word" src="/media/brand/logo.svg" width="363" height="180" alt={isTr ? "Rota Robotik Sistemler" : "Rota Robotic Systems"} fetchpriority="high" />
       </span>
     </a>
     <div class="rota-header__actions">
@@ -191,7 +191,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
   </header>
 
   <nav class="rota-menu" id="rota-menu" data-open="false" data-level="root" aria-label={isTr ? "Ana menü" : "Main menu"} aria-hidden="true" hidden>
-    <DesktopMenu homeLinks={true} languageHref={languageHref} />
+    <DesktopMenu languageHref={languageHref} />
     <div class="rota-menu__stage">
       <div class="rota-menu__panel rota-menu__panel--main" data-menu-panel="main" data-active="true" aria-hidden="false">
         <a class="rota-menu__mobile-language" href={languageHref} hreflang={isTr ? "en" : "tr"}>
@@ -203,7 +203,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
               <span>{item.label}</span><i class="rota-menu__chevron rota-menu__chevron--down" aria-hidden="true"></i>
             </button>
           ) : (
-            <a href={item.href}><span>{item.label}</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
+            <a href={item.href} title={`${item.label} sayfasını açın`}><span>{item.label}</span><i class="rota-menu__chevron rota-menu__chevron--next" aria-hidden="true"></i></a>
           ))}
         </div>
       </div>
@@ -216,7 +216,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
           <p class="rota-menu__panel-title">{group.title}</p>
           <div class="rota-menu__sub-links">
             {group.items.map((item) => (
-              <a class={`rota-menu__depth-${item.depth ?? 1}`} href={item.href}>{item.label}</a>
+              <a class={`rota-menu__depth-${item.depth ?? 1}`} href={item.href} title={`${item.label} sayfasını inceleyin`}>{item.label}</a>
             ))}
           </div>
         </div>
@@ -225,9 +225,8 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
     <p class="rota-menu__copyright">Tüm hakları saklıdır © {currentYear} Rota Robotik</p>
     <div class="rota-menu__social-rail" aria-label={isTr ? "Sosyal medya" : "Social media"}>
       <div class="rota-menu__socials">
-        <a href="#contact" aria-label="Instagram"><Icon name="instagram" /></a>
-        <a href="#contact" aria-label="LinkedIn"><Icon name="linkedin" /></a>
-        <a href="#contact" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
+        <a href="https://www.linkedin.com/company/rota-robotik-sistemler/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+        <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
       </div>
     </div>
   </nav>
@@ -251,7 +250,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
         <p class="rota-home__tagline" aria-label="GELECEĞİN ÜRETİMİNİ TASARLAMAK" data-hero-tagline data-typing-state="waiting">
           <span class="rota-home__tagline-first"><span data-tagline-first></span><i class="rota-home__typing-caret" aria-hidden="true"></i></span><span class="rota-home__tagline-second"><span data-tagline-second></span></span>
         </p>
-        <a class="rota-home__scroll-cue" href="#corporate" aria-label="Aşağı kaydır"><img src="/media/ui/arrow-down.webp" width="102" height="66" alt="" /></a>
+        <a class="rota-home__scroll-cue" href="#corporate" title={isTr ? "Kurumsal bölüme ilerle" : "Continue to the corporate section"} aria-label={isTr ? "Aşağı kaydır" : "Scroll down"}><img src="/media/ui/arrow-down.webp" width="102" height="66" alt={isTr ? "Aşağı yön oku" : "Down arrow"} /></a>
       </div>
       <h1 class="rota-home__title">Rota Robotik Sistemler</h1>
     </section>
@@ -271,7 +270,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
               </div>
             </div>
             <button class="rota-about__media" type="button" data-about-image-open data-scroll-motion="right" aria-label="Hakkımızda görselini büyüt">
-              <img src="/media/corporate/about-home-cover.webp" alt="" width="1602" height="1191" loading="lazy" decoding="async" />
+              <img src="/media/corporate/about-home-cover.webp" alt={isTr ? "Rota Robotik üretim sahası" : "Rota Robotic production facility"} width="1602" height="1191" loading="lazy" decoding="async" />
             </button>
           </div>
         ) : section.id === "expertise" ? (
@@ -285,7 +284,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
               <img src="/media/corporate/about-cover.webp" alt="Robotik üretim hattı" width="1254" height="1254" loading="lazy" decoding="async" />
               <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
             </button>
-            <a class="rota-section__detail-link rota-section__detail-link--expertise" href="/uzmanliklar/">
+            <a class="rota-section__detail-link rota-section__detail-link--expertise" href="/uzmanliklar/" title={isTr ? "Tüm uzmanlık alanlarımızı inceleyin" : "Explore all our areas of expertise"}>
               <span>{expertiseContent.cta}</span><i aria-hidden="true"></i>
             </a>
           </div>
@@ -301,7 +300,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
                 {[0, 1].map((groupIndex) => (
                   <div class="rota-technologies__group" aria-hidden={groupIndex === 1 ? "true" : undefined}>
                     {technologyContent.items.map((item) => (
-                      <a class="rota-technology-card" href={item.href} aria-label={`${item.title} teknolojisini incele`} tabindex={groupIndex === 1 ? -1 : undefined}>
+                      <a class="rota-technology-card" href={item.href} title={`${item.title}: ${item.description}`} aria-label={`${item.title} teknolojisini incele`} tabindex={groupIndex === 1 ? -1 : undefined}>
                         <span class="rota-technology-card__image"><img src={item.image} alt={`${item.title} robotik sistem uygulaması`} width="720" height="480" loading="lazy" decoding="async" /></span>
                         <span class="rota-technology-card__copy">
                           <strong>{item.title}</strong>
@@ -313,7 +312,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
                 ))}
               </div>
             </div>
-            <a class="rota-section__detail-link rota-section__detail-link--technology" href="/teknolojiler/">
+            <a class="rota-section__detail-link rota-section__detail-link--technology" href="/teknolojiler/" title={isTr ? "Tüm robotik üretim teknolojilerimizi inceleyin" : "Explore all our robotic production technologies"}>
               <span>{technologyContent.cta}</span><i aria-hidden="true"></i>
             </a>
           </div>
@@ -325,13 +324,13 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
               <ul class="rota-references__projects">
                 {referencesContent.projects.map((project) => <li>{project}</li>)}
               </ul>
-              <a class="rota-section__detail-link rota-section__detail-link--references" href="/referanslar/">
+              <a class="rota-section__detail-link rota-section__detail-link--references" href="/referanslar/" title={isTr ? "Tüm referanslarımızı inceleyin" : "Explore all our references"}>
                 <span>Tüm Referanslarımız</span><i aria-hidden="true"></i>
               </a>
             </div>
             <div class="rota-references__logos" data-scroll-motion="right" aria-label="Rota Robotik referans logoları">
               {referencesContent.logos.map((logo) => (
-                <a class="rota-reference-logo" href="/referanslar/" aria-label={`${logo.name} referansını incele`}>
+                <a class="rota-reference-logo" href="/referanslar/" title={`${logo.name} ${isTr ? "referansını inceleyin" : "reference"}`} aria-label={`${logo.name} referansını incele`}>
                   <img src={`/media/references/${logo.file}`} width={logo.width} height={logo.height} alt={`${logo.name} logosu`} loading="lazy" decoding="async" />
                   <strong>{logo.name}</strong>
                 </a>
@@ -396,7 +395,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
         <p>Uluslararası Standartlarda Üretim</p>
         <strong id="trust-certificates-title">ISO 9001:2015 <i aria-hidden="true">·</i> ISO 14001:2015</strong>
       </div>
-      <a class="rota-certification-trust__link" href="/sertifikalar/" data-scroll-motion="up"><span>Tüm Sertifikaları İncele</span><i aria-hidden="true">→</i></a>
+      <a class="rota-certification-trust__link" href="/sertifikalar/" title={isTr ? "Rota Robotik sertifikalarını inceleyin" : "Explore Rota Robotic certificates"} data-scroll-motion="up"><span>Tüm Sertifikaları İncele</span><i aria-hidden="true">→</i></a>
     </section>
 
     <footer class="rota-footer" id="footer" data-snap-section>
@@ -408,8 +407,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
           </a>
           <p>Geleceğin üretimini; akıllı, güvenilir ve sürdürülebilir robotik sistemlerle birlikte tasarlıyor, fikirden devreye almaya kadar her aşamada mühendislik gücümüzü üretime taşıyoruz.</p>
           <div class="rota-footer__socials" aria-label="Sosyal medya bağlantıları">
-            <a href="#contact" aria-label="Instagram"><Icon name="instagram" /></a>
-            <a href="https://tr.linkedin.com/company/rota-robotik-sistemler" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+            <a href="https://www.linkedin.com/company/rota-robotik-sistemler/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
             <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
           </div>
         </div>
@@ -420,7 +418,7 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
             <a href="/hakkimizda/">Hakkımızda</a>
             <a href="/vizyon-misyon/">Vizyon &amp; Misyon</a>
             <a href="/kalite-politikamiz/">Kalite Politikamız</a>
-            <a href="/sertifikalar/">Sertifikalar</a>
+            <a href="/sertifikalar/" title="Rota Robotik sertifikalarını inceleyin">Sertifikalar</a>
             <a href="#references">Referanslar</a>
           </div>
           <div class="rota-footer__group">
@@ -432,23 +430,23 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
             <a href="/uzmanliklar/mekanik-elektrik-imalat/">Mekanik - Elektrik İmalat</a>
             <a href="/uzmanliklar/elektrik-projelendirme/">Elektrik Projelendirme</a>
             <a href="/uzmanliklar/otomasyon-yazilim/">Otomasyon Yazılımı</a>
-            <a href="/uzmanliklar/">Tüm Uzmanlıklarımız</a>
+            <a href="/uzmanliklar/" title={isTr ? "Tüm uzmanlık alanlarımızı inceleyin" : "Explore all our areas of expertise"}>Tüm Uzmanlıklarımız</a>
           </div>
           <div class="rota-footer__group">
             <h3>Teknolojiler</h3>
-            <a href="/teknolojiler/kaynak-teknolojileri/">Kaynak Teknolojileri</a>
-            <a href="/teknolojiler/tasima-sistemleri/">Taşıma Sistemleri</a>
-            <a href="/teknolojiler/montaj-sistemleri/">Montaj Sistemleri</a>
-            <a href="/teknolojiler/mastikleme-dozajlama-sistemleri/">Mastikleme Sistemleri</a>
-            <a href="/teknolojiler/isbirlikci-robotlu-sistemler/">İş Birlikçi Robotlu Sistemler</a>
-            <a href="/teknolojiler/">Tüm Teknolojilerimiz</a>
+            <a href="/teknolojiler/kaynak-teknolojileri/" title="Robotik kaynak teknolojilerini inceleyin">Kaynak Teknolojileri</a>
+            <a href="/teknolojiler/tasima-sistemleri/" title="Robotik taşıma sistemlerini inceleyin">Taşıma Sistemleri</a>
+            <a href="/teknolojiler/montaj-sistemleri/" title="Robotik montaj sistemlerini inceleyin">Montaj Sistemleri</a>
+            <a href="/teknolojiler/mastikleme-dozajlama-sistemleri/" title="Mastikleme ve dozajlama sistemlerini inceleyin">Mastikleme Sistemleri</a>
+            <a href="/teknolojiler/isbirlikci-robotlu-sistemler/" title="İş birlikçi robotlu sistemleri inceleyin">İş Birlikçi Robotlu Sistemler</a>
+            <a href="/teknolojiler/" title={isTr ? "Tüm robotik üretim teknolojilerimizi inceleyin" : "Explore all our robotic production technologies"}>Tüm Teknolojilerimiz</a>
           </div>
         </nav>
 
         <div class="rota-footer__contact">
           <h3>Bize Ulaşın</h3>
           <a href="mailto:info@rotarobotik.com"><Icon name="envelope" /><span>info@rotarobotik.com</span></a>
-          <a href="tel:+905387788118"><Icon name="telephone" /><span>+90 538 778 81 18</span></a>
+          <a href="https://wa.me/905387788118" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden iletişime geçin"><Icon name="whatsapp" /><span>+90 538 778 81 18</span></a>
           <p><Icon name="location" /><span>Yarış Çıkmazı Sokak No:1<br />Bağımsız Bölüm No:347<br />İSTİM Tuzla / İstanbul</span></p>
         </div>
       </div>
