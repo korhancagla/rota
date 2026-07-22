@@ -118,7 +118,16 @@ const mobileGroups = [
     if (open) showSubpageMenuPanel("main");
   };
 
-  subpageMenuButton?.addEventListener("click", () => setSubpageMenu(subpageMenuButton.getAttribute("aria-expanded") !== "true"));
+  const toggleSubpageMenu = () => {
+    if (!subpageMenuButton) return;
+    setSubpageMenu(subpageMenuButton.getAttribute("aria-expanded") !== "true");
+  };
+
+  subpageMenuButton?.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    toggleSubpageMenu();
+  }, { passive: false });
+  subpageMenuButton?.addEventListener("click", toggleSubpageMenu);
   subpageMenuTargets.forEach((target) => target.addEventListener("click", () => showSubpageMenuPanel(target.dataset.subpageMenuTarget ?? "main", true)));
   subpageMenuBackButtons.forEach((back) => back.addEventListener("click", () => showSubpageMenuPanel("main", true)));
   subpageMenu?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => link.addEventListener("click", () => setSubpageMenu(false)));

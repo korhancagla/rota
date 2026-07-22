@@ -782,7 +782,16 @@ const submenuGroups = sitemapGroups.slice(0, 3).map((group, index) => ({
     if (open) showMenuPanel("main");
   };
 
-  button?.addEventListener("click", () => setMenu(button.getAttribute("aria-expanded") !== "true"));
+  const toggleMenu = () => {
+    if (!button) return;
+    setMenu(button.getAttribute("aria-expanded") !== "true");
+  };
+
+  button?.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    toggleMenu();
+  }, { passive: false });
+  button?.addEventListener("click", toggleMenu);
   menuTargets.forEach((target) => {
     target.addEventListener("click", () => showMenuPanel(target.dataset.menuTarget ?? "main", true));
   });
